@@ -155,6 +155,18 @@ The following findMany() query returns all User records:
 ```bash
 const users = await prisma.user.findMany()
 ```
+## Update
+```bash
+const updateUser = await prisma.user.update({
+  where: {
+    email: 'viola@prisma.io',
+  },
+  data: {
+    name: 'Viola the Magnificent',
+  },
+})
+```
+
 
 
 
