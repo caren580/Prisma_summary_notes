@@ -35,7 +35,95 @@ npm install prisma --save-dev
 ### Setting up a new prisma project
 Once the Prisma CLI is installed, you can set up a new Prisma project. Start by initializing Prisma in your project directory:
 
-``npx prisma init --datasource-provider DATABASE``
+```bash
+npx prisma init --datasource-provider DATABASE
+```
+Prisma uses postgresql by default, so if your database is postgresql, you can run the command without passing --datasource-provider flag.
+
+```bash
+npx prisma init
+```
+
+## Models
+The data model definition part of the Prisma schema defines your application models (also called Prisma models). Models:
+<ul>
+<li>Represent the entities of your application domain</li>
+<li>Map to the tables (relational databases like PostgreSQL) or collections (MongoDB) in your database</li>
+<li>Form the foundation of the queries available in the generated Prisma Client API</li>
+<li>When used with TypeScript, Prisma Client provides generated type definitions for your models and any variations of them to make database access entirely type safe.</li>
+</ul>
+
+```prisma
+generator client {
+ provider = "prisma-client-js"
+}
+
+datasource db {
+ provider = "postgresql"
+ url      = env("DATABASE_URL")
+}
+
+model User {
+ id        Int       @id @default(autoincrement())
+ email     String    @unique
+ name      String?
+ password  String
+ createdAt DateTime  @default(now()) @map("created_at")
+ updatedAt DateTime  @updatedAt @map("updated_at")
+ posts     Post[]
+ comments  Comment[]
+
+ @@map("users")
+}
+
+model Post {
+ id        Int       @id @default(autoincrement())
+ title     String
+ content   String?
+ published Boolean   @default(false)
+ createdAt DateTime  @default(now()) @map("created_at")
+ updatedAt DateTime  @updatedAt @map("updated_at")
+ authorId  Int       @map("author_id")
+ author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+ comments  Comment[]
+
+ @@map("posts")
+}
+
+model Comment {
+ id        Int      @id @default(autoincrement())
+ content   String
+ createdAt DateTime @default(now()) @map("created_at")
+ updatedAt DateTime @updatedAt @map("updated_at")
+ postId    Int      @map("post_id")
+ post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+ authorId  Int      @map("author_id")
+ author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+ @@map("comments")
+}
+```
+
+
+#### Let's break down what's happening in this schema:
+
+1. We've defined three models: User, Post, and Comment
+2. Each model has fields with types like Int, String, Boolean, and DateTime
+3. We're using attributes (prefixed with @) to define constraints and defaults
+4. We've established relationships between models using the @relation attribute
+5. We're using @@map to specify the actual table names in the database (following snake_case convention)
+
+#### Some notable features in our schema include:
+<ul>
+<li>@id marks a field as the primary key</li>
+<li>@default(autoincrement()) automatically increments the ID for new records</li>
+<li>@unique ensures that the email field contains unique values</li>
+<li>@updatedAt automatically updates the timestamp when a record changes</li>
+<li>@map renames fields to follow database naming conventions</li>
+</ul>
+
+
+
 
 
 
