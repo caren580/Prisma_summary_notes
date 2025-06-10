@@ -134,6 +134,13 @@ This command does three things:
 2. Executes the SQL in that migration file against your database
 3. Generates the Prisma Client based on your schema
 
+## Prisma Client
+The Prisma Client is an auto-generated and type-safe database client that you use to interact with your database in a Node.js or TypeScript application. It’s generated based on the models you define in your Prisma schema (schema.prisma) and provides a simple, intuitive, and type-safe API for CRUD operations, filtering, pagination, and more.
+To generate a client, we use the command:
+```bash
+npx prisma generate
+```
+
 
 
 
