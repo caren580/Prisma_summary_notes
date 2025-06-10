@@ -25,7 +25,17 @@ Prisma is designed to be database-agnostic, supporting multiple databases such a
 ## Installation and Setup
 ### Installing Prisma CLI
 The Prisma CLI is a powerful tool that helps you manage your Prisma project. To install it, run the following command:
-`npm install prisma -D`
+```bash
+npm install prisma -D
+```
 or
-`npm install prisma --save-dev`
+```bash
+npm install prisma --save-dev
+```
+### Setting up a new prisma project
+Once the Prisma CLI is installed, you can set up a new Prisma project. Start by initializing Prisma in your project directory:
+
+``npx prisma init --datasource-provider DATABASE``
+
+
 
