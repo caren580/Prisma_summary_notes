@@ -166,6 +166,14 @@ const updateUser = await prisma.user.update({
   },
 })
 ```
+## Delete
+```bash
+const deleteUser = await prisma.user.delete({
+  where: {
+    email: 'bert@prisma.io',
+  },
+})
+```
 
 
 
