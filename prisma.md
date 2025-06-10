@@ -140,6 +140,15 @@ To generate a client, we use the command:
 ```bash
 npx prisma generate
 ```
+## Create a new user record
+```
+const user = await prisma.user.create({
+  data: {
+    email: 'elsa@gmail.com',
+    name: 'Elsa Prisma',
+  },
+})
+```
 
 
 
