@@ -21,3 +21,11 @@ Prisma is designed to be database-agnostic, supporting multiple databases such a
 1. Consistency: The schema file serves as a single source of truth for your data models, ensuring consistency across your application.
 2. Automated Migrations: Prisma Migrate uses the schema file to generate and apply database migrations automatically. This simplifies the process of evolving your database schema and reduces the risk of migration errors.
 3. Improved Collaboration: The schema file can be version-controlled, making it easier for teams to collaborate on database changes and track the history of schema modifications.
+
+## Installation and Setup
+### Installing Prisma CLI
+The Prisma CLI is a powerful tool that helps you manage your Prisma project. To install it, run the following command:
+`npm install prisma -D`
+or
+`npm install prisma --save-dev`
+
