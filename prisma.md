@@ -122,6 +122,19 @@ model Comment {
 <li>@map renames fields to follow database naming conventions</li>
 </ul>
 
+## Migrations
+With our schema defined, it's time to create and apply migrations to set up our database tables. Prisma Migrate compares your schema to the current state of the database and generates the necessary SQL statements to synchronize them.
+Run the following command to create your first migration:
+```bash
+npx prisma migrate dev --name MIGRATION-NAME
+```
+This command does three things:
+
+1. Creates a new migration file in the prisma/migrations directory
+2. Executes the SQL in that migration file against your database
+3. Generates the Prisma Client based on your schema
+
+
 
 
 
