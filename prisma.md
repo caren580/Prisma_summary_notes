@@ -149,6 +149,12 @@ const user = await prisma.user.create({
   },
 })
 ```
+## Read
+#### Get all record
+The following findMany() query returns all User records:
+```bash
+const users = await prisma.user.findMany()
+```
 
 
 
